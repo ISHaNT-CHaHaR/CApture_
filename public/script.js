@@ -1,31 +1,29 @@
+let lat, lon;
+
+const button = document.getElementById('butt');
+
+button.addEventListener('click', async (event) => {
+   const data = { lat, lon };
+   const options = {
+      method: 'POST',
+      headers: {
+         'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+   };
+   const response = await fetch('/api', options);
+   const json = await response.json();
+   console.log(json);
+});
+
 if ('geolocation' in navigator) {
    console.log('geolocation available');
-   /* geolocation is available */
-
    navigator.geolocation.getCurrentPosition(async (position) => {
-      const lat = position.coords.latitude;
-      const long = position.coords.longitude;
-
-     
-
+      lat = position.coords.latitude;
+      lon = position.coords.longitude;
       document.getElementById('latitude').textContent = lat;
-      document.getElementById('longitude').textContent = long;
-      const data = {
-         lat,
-         long,
-      };
-      const options = {
-         method: 'post',
-         headers: {
-            'Content-Type': 'application/json',
-         },
-         body: JSON.stringify(data),
-      };
-      const res = await fetch('/api', options);
-      const json = await res.json();
-      console.log(json);
+      document.getElementById('longitude').textContent = lon;
    });
 } else {
-   /* geolocation IS NOT available */
-   console.log('geolocation available');
+   console.log('geolocation not available');
 }

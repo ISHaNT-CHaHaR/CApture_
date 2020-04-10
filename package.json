@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ISHaNT-CHaHaR/CApture_#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nedb": "^1.8.0"
   }
 }
