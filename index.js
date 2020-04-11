@@ -26,19 +26,21 @@ database.loadDatabase(); //Itb creates that file for DB
 // });
 
 app.post('/api', (req, res) => {
-   console.log(req.body);
-   console.log('I got a request.');
-
    const data = req.body;
    const timestamp = Date.now();
    data.timestamp = timestamp;
 
    database.insert(data);
 
-   res.json({
-      status: 'success',
-      timestamp: timestamp,
-      latitude: req.body.lat,
-      longitude: req.body.long,
+   res.json(data);
+});
+
+app.get('/api', (req, res) => {
+   database.find({}, (err, data) => {
+      if (err) {
+         res.end();
+         return;
+      }
+      res.json(data);
    });
 });
